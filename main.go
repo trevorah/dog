@@ -25,7 +25,7 @@ func main() {
 		panic(err)
 	}
 
-	terminalWidth, terminalHeight, err := terminal.GetSize(int(os.Stdout.Fd()))
+	terminalWidth, terminalHeight, err := terminal.GetSize(int(os.Stdin.Fd()))
 	if err != nil {
 		panic(err)
 	}
@@ -33,7 +33,7 @@ func main() {
 	imgWidth := src.Bounds().Max.X
 	imgHeight := src.Bounds().Max.Y
 
-	scale := math.Min(float64(terminalWidth)/float64(imgWidth), float64(terminalHeight*2)/float64(imgHeight))
+	scale := math.Min(float64(terminalWidth)/float64(imgWidth), float64((terminalHeight-1)*2)/float64(imgHeight))
 
 	rect := image.Rect(0, 0, int(float64(imgWidth)*scale), int(float64(imgHeight)*scale))
 
